@@ -1,6 +1,6 @@
 {
-  "name": "vue-countdown-timer",
-  "version": "1.0.0",
+  "name": "vuejs-countdown-timer",
+  "version": "1.0.1",
   "description": "Vue 2 countdown and timer component",
   "main": "/dist/vue-countdown-timer.js",
   "scripts": {
