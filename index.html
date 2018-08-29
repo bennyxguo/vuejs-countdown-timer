@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vuejs-countdown-timer</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="dist/vue-countdown-timer.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #app {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: 500px;
+      width: 800px;
+      margin: 0 auto;
+      padding: 0 50px;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div>
+    <h3>默认模板</h3>
+    <vue-countdown-timer
+      @start_callback="startCallBack('活动开始')"
+      @end_callback="endCallBack('活动结束')"
+      :current-time="1481450106"
+      :start-time="1481450110"
+      :end-time="1481450115"
+      :tip-text="'距离开始文字1'"
+      :tip-text-end="'距离结束文字1'"
+      :end-text="'结束自定义文字2'"
+      :day-txt="'天'"
+      :hour-txt="'小时'"
+      :minutes-txt="'分钟'"
+      :seconds-txt="'秒'">
+    </vue-countdown-timer>
+  </div>
+
+  <div>
+    <h3>自定义模板</h3>
+    <vue-countdown-timer
+      @start_callback="startCallBack('活动开始')" @end_callback="endCallBack('活动结束')"
+      :current-time="1481450106" :start-time="1481450110" :end-time="1481450115" :tip-text="'距离开始文字1'"
+      :tip-text-end="'距离结束文字1'" :end-text="'结束自定义文字2'" :day-txt="'天'" :hour-txt="'小时'" :minutes-txt="'分钟'"
+      :seconds-txt="'秒'">
+      <template slot-scope="scope">
+        <span v-if="scope.props.tipShow">{{scope.props.tipText}}:</span>
+        <span v-if="!scope.props.tipShow">{{scope.props.tipTextEnd}}:</span>
+        <span v-if="scope.props.msTime.day>0"><span>{{scope.props.msTime.day}}</span><i>{{scope.props.dayTxt}}</i></span>
+        <span>{{scope.props.msTime.hour}}</span><i>{{scope.props.hourTxt}}</i>
+        <span>{{scope.props.msTime.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
+        <span>{{scope.props.msTime.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+        <span v-if="!scope.props.msTime.show">{{scope.props.endText}}</span>
+      </template>
+    </vue-countdown-timer>
+  </div>
+
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data() {
+    },
+    methods: {
+      startCallBack: function (msg) {
+        console.log(msg)
+      },
+      endCallBack: function (msg) {
+        console.log(msg)
+      }
+    }
+  })
+
+  Vue.use(VueCountdownTimer)
+</script>
+</body>
+</html>

@@ -4,7 +4,74 @@ const VueCountdownTimer = {
   install(Vue, options) {
     Vue.component('VueCountdownTimer', {
       mixins: [CountdownTimerComponent],
-      replace: true,
+      props: {
+        tipText: {
+          type: String,
+          default: function () {
+            return '距离开始'
+          }
+        },
+        tipTextEnd: {
+          type: String,
+          default: function () {
+            return '距离结束'
+          }
+        },
+        id: {
+          type: String,
+          default: function () {
+            return '1'
+          }
+        },
+        currentTime: {
+          type: Number,
+          default: function () {
+            return new Date().getTime()
+          }
+        },
+        startTime: {
+          type: Number
+        },
+        endTime: {
+          type: Number
+        },
+        endText: {
+          type: String,
+          default: function () {
+            return '已结束'
+          }
+        },
+        dayTxt: {
+          type: String,
+          default: function () {
+            return ':'
+          }
+        },
+        hourTxt: {
+          type: String,
+          default: function () {
+            return ':'
+          }
+        },
+        minutesTxt: {
+          type: String,
+          default: function () {
+            return ':'
+          }
+        },
+        secondsTxt: {
+          type: String,
+          default: function () {
+            return ':'
+          }
+        },
+        secondsFixed: {
+          type: Boolean,
+          default: function () {
+            return false
+          }
+        }
+      },
       data() {
         return {
           tipShow: true,
@@ -25,76 +92,28 @@ const VueCountdownTimer = {
           this.gogogo();
         }
       },
-      props: {
-        //距离开始提示文字
-        tipText: {
-          type: String,
-          default: '距离开始'
-        },
-        //距离结束提示文字
-        tipTextEnd: {
-          type: String,
-          default: '距离结束'
-        },
-        //时间控件ID
-        id: {
-          type: String,
-          default: '1'
-        },
-        //当前时间
-        currentTime: {
-          type: Number
-        },
-        // 活动开始时间
-        startTime: {
-          type: Number
-        },
-        // 活动结束时间
-        endTime: {
-          type: Number
-        },
-        // 倒计时结束显示文本
-        endText: {
-          type: String,
-          default: '已结束'
-        },
-        //自定义显示文字:天
-        dayTxt: {
-          type: String,
-          default: ':'
-        },
-        //自定义显示文字:时
-        hourTxt: {
-          type: String,
-          default: ':'
-        },
-        //自定义显示文字:分
-        minutesTxt: {
-          type: String,
-          default: ':'
-        },
-        secondsTxt: {
-          type: String,
-          default: ':'
-        },
-        //是否开启秒表倒计，未完成
-        secondsFixed: {
-          type: Boolean,
-          default: false
-        },
-      },
       mounted () {
         this.gogogo();
       },
       methods: {
         gogogo: function () {
           //判断是秒还是毫秒
-          this.startTime.toString().length == 10 ? this.star = this.startTime * 1000 : this.star = this.startTime;
-          this.endTime.toString().length == 10 ? this.end = this.endTime * 1000 : this.end = this.endTime;
-          if (this.currentTime) {
-            this.currentTime.toString().length == 10 ? this.current = this.currentTime * 1000 : this.current = this.currentTime;
+          if (this.startTime.toString().length === 10) {
+            this.star = this.startTime * 1000
           } else {
-            this.current = ( new Date() ).getTime();
+            this.star = this.startTime
+          }
+
+          if (this.endTime.toString().length === 10) {
+            this.end = this.endTime * 1000
+          } else {
+            this.end = this.endTime
+          }
+
+          if (this.currentTime.toString().length === 10) {
+            this.current = this.currentTime * 1000
+          } else {
+            this.current = this.currentTime
           }
 
           if (this.end < this.current) {
@@ -185,7 +204,7 @@ const VueCountdownTimer = {
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(VuePreview)
+  window.Vue.use(VueCountdownTimer)
 }
 
 export default VueCountdownTimer

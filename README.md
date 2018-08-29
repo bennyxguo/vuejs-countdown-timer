@@ -63,7 +63,20 @@ methods: {
 Vue template
 
 ```vue
-<vue-countdown-timer v-on:start_callback="countDownS_cb(1)" v-on:end_callback="countDownE_cb(1)" :currentTime="1481450106" :startTime="1481450110" :endTime="1481450115" :tipText="'距离开始文字1'" :tipTextEnd="'距离结束文字1'" :endText="'结束自定义文字2'" :dayTxt="'天'" :hourTxt="'小时'" :minutesTxt="'分钟'" :secondsTxt="'秒'"></vue-countdown-timer>
+<vue-countdown-timer
+  @start_callback="startCallBack('活动开始')"
+  @end_callback="endCallBack('活动结束')"
+  :current-time="1481450106"
+  :start-time="1481450110"
+  :end-time="1481450115"
+  :tip-text="'距离开始文字1'"
+  :tip-text-end="'距离结束文字1'"
+  :end-text="'结束自定义文字2'"
+  :day-txt="'天'"
+  :hour-txt="'小时'"
+  :minutes-txt="'分钟'"
+  :seconds-txt="'秒'">
+</vue-countdown-timer>
 ```
 
 ### Props
