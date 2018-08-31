@@ -40,14 +40,14 @@ Javascript
 
 ``` javascript
 // global register
-import VueCountdownTimer from 'vue-countdown-timer'
+import VueCountdownTimer from 'vuejs-countdown-timer'
 Vue.use(VueCountdownTimer)
 
 // defalut install
 Vue.use(VuePhotoswipe)
 
 // or for a single instance
-import VueCountdownTimer from 'vue-countdown-timer'
+import VueCountdownTimer from 'vuejs-countdown-timer'
 
 components: {
     VueCountdownTimer

@@ -40,14 +40,14 @@ Javascript
 
 ``` javascript
 // 全局引入
-import VueCountdownTimer from 'vue-countdown-timer'
+import VueCountdownTimer from 'vuejs-countdown-timer'
 Vue.use(VueCountdownTimer)
 
 // 默认引入
 Vue.use(VuePhotoswipe)
 
 // 按需引入
-import VueCountdownTimer from 'vue-countdown-timer'
+import VueCountdownTimer from 'vuejs-countdown-timer'
 
 components: {
     VueCountdownTimer
