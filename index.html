@@ -33,8 +33,8 @@
       :current-time="1481450106"
       :start-time="1481450110"
       :end-time="1481450115"
-      :tip-text="'距离开始文字1'"
-      :tip-text-end="'距离结束文字1'"
+      :start-label="'距离开始文字1'"
+      :end-label="'距离结束文字1'"
       :end-text="'结束自定义文字2'"
       :day-txt="'天'"
       :hour-txt="'小时'"
@@ -51,12 +51,14 @@
       :tip-text-end="'距离结束文字1'" :end-text="'结束自定义文字2'" :day-txt="'天'" :hour-txt="'小时'" :minutes-txt="'分钟'"
       :seconds-txt="'秒'">
       <template slot-scope="scope">
-        <span v-if="scope.props.tipShow">{{scope.props.tipText}}:</span>
-        <span v-if="!scope.props.tipShow">{{scope.props.tipTextEnd}}:</span>
+        <span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+        <span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
         <span v-if="scope.props.msTime.day>0"><span>{{scope.props.msTime.day}}</span><i>{{scope.props.dayTxt}}</i></span>
         <span>{{scope.props.msTime.hour}}</span><i>{{scope.props.hourTxt}}</i>
         <span>{{scope.props.msTime.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
         <span>{{scope.props.msTime.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+        <span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+        <span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
         <span v-if="!scope.props.msTime.show">{{scope.props.endText}}</span>
       </template>
     </vue-countdown-timer>
