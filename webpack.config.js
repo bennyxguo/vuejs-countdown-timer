@@ -23,7 +23,7 @@ module.exports = {
     // specify your output directory...
     path: path.resolve(__dirname, './dist'),
     // and filename
-    filename: 'vue-countdown-timer.min.js',
+    filename: 'vuejs-countdown-timer.min.js',
     library: 'VueCountdownTimer',
     libraryTarget: 'umd',
     umdNamedDefine: true

@@ -15,47 +15,49 @@
   </a>
 </p>
 
-> 一 Vue 2 countdown and timer component
+> 一 Vue 2 活动倒计时组件
 
-## Installation
+## 安装
 
 ``` bash
 npm i vuejs-countdown-timer -S
 ```
 
-## Usage
+## 使用
 
 ### Support
 
-| Supported Package | Version |
+| 支持包             | 版本    |
 |-------------------|---------|
 | Vue               | 2.5+    |
 
 
-### Install component
+### 引入组件
 
 Javascript
 
 ``` javascript
-// global register
+// 全局引入
 import VueCountdownTimer from 'vue-countdown-timer'
 Vue.use(VueCountdownTimer)
 
-// defalut install
+// 默认引入
 Vue.use(VuePhotoswipe)
 
-// or for a single instance
+// 按需引入
 import VueCountdownTimer from 'vue-countdown-timer'
 
 components: {
     VueCountdownTimer
 },
 methods: {
-  countDownS_cb: function (x) {
-    console.log(x)
+  // 活动开始回调方法
+  startCallBack: function (msg) {
+    console.log(msg)
   },
-  countDownE_cb: function (x) {
-    console.log(x)
+  // 活动结束回调方法
+  endCallBack: function (msg) {
+    console.log(msg)
   }
 }
 ```
@@ -64,80 +66,80 @@ Vue template
 
 ```vue
 <vue-countdown-timer
-  @start_callback="startCallBack('event started')"
-  @end_callback="endCallBack('event ended')"
+  @start_callback="startCallBack('活动开始')"
+  @end_callback="endCallBack('活动结束')"
   :current-time="1481450106"
   :start-time="1481450110"
   :end-time="1481450115"
-  :tip-text="'Until start'"
-  :tip-text-end="'Until end'"
-  :end-text="'Event ended'"
-  :day-txt="'days'"
-  :hour-txt="'hours'"
-  :minutes-txt="'minutes'"
-  :seconds-txt="'seconds'">
+  :tip-text="'距离开始:'"
+  :tip-text-end="'距离结束:'"
+  :end-text="'活动已结束'"
+  :day-txt="'天'"
+  :hour-txt="'小时'"
+  :minutes-txt="'分钟'"
+  :seconds-txt="'秒'">
 </vue-countdown-timer>
 ```
 
-### Props
+### 属性 (props)
 
-**current-time**
+**current-time** - 当前时间戳,如果不传,默认获取用户本地的时间(建议传服务器的当前时间) 
 - `type`: Number
 - `required` : false
 - `default`: `new Date().getTime()`
 
-**start-time**
+**start-time** - 开始时间戳
 - `type`: Number
 - `required` : true
 
-**end-time**
+**end-time** - 结束时间戳
 - `type`: Number
 - `required` : true
 
-**tip-text**
+**tip-text** - 开始倒计时之前的提示文字
 - `type`: String
 - `required` : false
 - `default` : '距离开始'
 
-**tip-text-end**
+**tip-text-end** - 开始倒计时之后的提示文字
 - `type`: String
 - `required` : false
 - `default` : '距离结束'
     
-**end-text**
+**end-text** - 倒计时结束之后的提示文字
 - `type`: String
 - `required` : false
 - `default` : '已结束'
 
-**day-txt**
+**day-txt** - 自定义显示的天数文字
 - `type`: String
 - `required` : false
 - `default` : ':'
     
-**hour-txt**
+**hour-txt** - 自定义显示的小时文字
 - `type`: String
 - `required` : false
 - `default` : ':'
 
-**seconds-txt**
+**seconds-txt** - 自定义显示的分钟文字
 - `type`: String
 - `required` : false
 - `default` : ':'
 
-**seconds-fixed**
+**seconds-fixed** - 自定义显示的秒数文字
 - `type`: String
 - `required` : false
 - `default` : ':'
     
-### Events
-**start_callback** - Event started callback
+### 事件
+**start_callback** - 开始倒计时结束之后的回调方法
 - `type`: Function
 - `required` : false
 
-**end_callback** - Event ended callback
+**end_callback** - 活动倒计时结束之后的回调方法
 - `type`: Function
 - `required` : false
-    
+
 # Liscense
 MIT License
 

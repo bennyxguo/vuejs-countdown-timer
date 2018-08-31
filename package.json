@@ -1,14 +1,14 @@
 {
   "name": "vuejs-countdown-timer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vue 2 countdown and timer component",
-  "main": "/dist/vue-countdown-timer.js",
+  "main": "/dist/vuejs-countdown-timer.min.js",
   "scripts": {
     "build": "webpack -p"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TriDiamond/vue-countdown-timer.git"
+    "url": "git+https://github.com/TriDiamond/vuejs-countdown-timer.git"
   },
   "keywords": [
     "Vue2",
@@ -19,9 +19,9 @@
   "author": "TriDiamond <bennygx@vip.qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TriDiamond/vue-countdown-timer/issues"
+    "url": "https://github.com/TriDiamond/vuejs-countdown-timer/issues"
   },
-  "homepage": "https://github.com/TriDiamond/vue-countdown-timer#readme",
+  "homepage": "https://github.com/TriDiamond/vuejs-countdown-timer#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
