@@ -1,4 +1,4 @@
-# ⏰ Vue-countdown-timer Component
+# Vue-countdown-timer Component
 
 <p>
   <a href="https://circleci.com/gh/TriDiamond/vuejs-countdown-timer/tree/master">
@@ -15,7 +15,7 @@
   </a>
 </p>
 
-> 一 ⏰ Vue 2 countdown and timer component
+> 一 Vue 2 countdown and timer component
 
 [📙中文文档](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README_CN.md)
 
