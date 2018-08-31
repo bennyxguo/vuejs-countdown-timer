@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 (Aus 31, 2018)
+
+- Changed `tip-text` to `start-label` and `tip-text-end` to `end-label` .
+- `start-label` and `end-label` has default value of empty, optional props, will not display if not passed.
+- Added `label-position`, count down label can be set at `begin` or at `end`
+
 ## 1.0.4 (Aus 31, 2018)
 
 - Changed package name and js file name to vuejs-countdown-timer

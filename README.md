@@ -43,20 +43,11 @@ Javascript
 import VueCountdownTimer from 'vuejs-countdown-timer'
 Vue.use(VueCountdownTimer)
 
-// defalut install
-Vue.use(VuePhotoswipe)
-
-// or for a single instance
-import VueCountdownTimer from 'vuejs-countdown-timer'
-
-components: {
-    VueCountdownTimer
-},
 methods: {
-  countDownS_cb: function (x) {
+  startCallBack: function (x) {
     console.log(x)
   },
-  countDownE_cb: function (x) {
+  endCallBack: function (x) {
     console.log(x)
   }
 }
@@ -71,9 +62,10 @@ Vue template
   :current-time="1481450106"
   :start-time="1481450110"
   :end-time="1481450115"
-  :tip-text="'Until start'"
-  :tip-text-end="'Until end'"
-  :end-text="'Event ended'"
+  :start-label="'Until start:'"
+  :end-label="'Until end:'"
+  label-position="begin"
+  :end-text="'Event ended!'"
   :day-txt="'days'"
   :hour-txt="'hours'"
   :minutes-txt="'minutes'"
@@ -96,20 +88,25 @@ Vue template
 - `type`: Number
 - `required` : true
 
-**tip-text**
+**start-label**
 - `type`: String
 - `required` : false
-- `default` : '距离开始'
+- `default` : ''
 
-**tip-text-end**
+**end-label**
 - `type`: String
 - `required` : false
-- `default` : '距离结束'
+- `default` : ''
+
+**label-position** - begin (before countdown) / end (after countdown)
+- `type`: String
+- `required` : false
+- `default` : 'begin'
     
 **end-text**
 - `type`: String
 - `required` : false
-- `default` : '已结束'
+- `default` : 'Event ended!'
 
 **day-txt**
 - `type`: String

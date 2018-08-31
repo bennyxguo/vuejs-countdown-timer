@@ -43,15 +43,6 @@ Javascript
 import VueCountdownTimer from 'vuejs-countdown-timer'
 Vue.use(VueCountdownTimer)
 
-// 默认引入
-Vue.use(VuePhotoswipe)
-
-// 按需引入
-import VueCountdownTimer from 'vuejs-countdown-timer'
-
-components: {
-    VueCountdownTimer
-},
 methods: {
   // 活动开始回调方法
   startCallBack: function (msg) {
@@ -73,8 +64,9 @@ Vue template
   :current-time="1481450106"
   :start-time="1481450110"
   :end-time="1481450115"
-  :tip-text="'距离开始:'"
-  :tip-text-end="'距离结束:'"
+  :start-label="'距离开始:'"
+  :end-label="'距离结束:'"
+  label-position="begin"
   :end-text="'活动已结束'"
   :day-txt="'天'"
   :hour-txt="'小时'"
@@ -98,20 +90,25 @@ Vue template
 - `type`: Number
 - `required` : true
 
-**tip-text** - 开始倒计时之前的提示文字
+**start-label** - 开始倒计时之前的提示文字
 - `type`: String
 - `required` : false
-- `default` : '距离开始'
+- `default` : ''
 
-**tip-text-end** - 开始倒计时之后的提示文字
+**end-label** - 开始倒计时之后的提示文字
 - `type`: String
 - `required` : false
-- `default` : '距离结束'
+- `default` : ''
+
+**label-position** - 倒计时提示位置 (begin 在倒计时前面 / end 在倒计时后面)
+- `type`: String
+- `required` : false
+- `default` : 'begin'
     
 **end-text** - 倒计时结束之后的提示文字
 - `type`: String
 - `required` : false
-- `default` : '已结束'
+- `default` : 'Event ended!'
 
 **day-txt** - 自定义显示的天数文字
 - `type`: String

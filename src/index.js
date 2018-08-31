@@ -5,17 +5,17 @@ const VueCountdownTimer = {
     Vue.component('VueCountdownTimer', {
       mixins: [CountdownTimerComponent],
       props: {
-        tipText: {
+        startLabel: {
           type: String,
-          default: function () {
-            return '距离开始'
-          }
+          default: ''
         },
-        tipTextEnd: {
+        endLabel: {
           type: String,
-          default: function () {
-            return '距离结束'
-          }
+          default: ''
+        },
+        labelPosition: {
+          type: String,
+          default: 'begin'
         },
         id: {
           type: String,
@@ -38,7 +38,7 @@ const VueCountdownTimer = {
         endText: {
           type: String,
           default: function () {
-            return '已结束'
+            return 'Event ended!'
           }
         },
         dayTxt: {
