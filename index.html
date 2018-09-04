@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>vuejs-countdown-timer</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.10.0/styles/github.css">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="dist/vuejs-countdown-timer.min.js"></script>
   <style>
@@ -11,64 +13,148 @@
       overflow: hidden;
     }
 
-    #app {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      height: 500px;
-      width: 800px;
-      margin: 0 auto;
-      padding: 0 50px;
-      background-color: #fafafa;
+    /*#app {*/
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*flex-direction: column;*/
+      /*height: 500px;*/
+      /*width: 800px;*/
+      /*margin: 0 auto;*/
+      /*padding: 0 50px;*/
+      /*background-color: #fafafa;*/
+    /*}*/
+    .gradient-background {
+      background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+      background-size: 300% 300%;
+      -webkit-animation: AnimationName 15s ease infinite;
+      -moz-animation: AnimationName 15s ease infinite;
+      animation: AnimationName 15s ease infinite;
+    }
+
+    @-webkit-keyframes AnimationName {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @-moz-keyframes AnimationName {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes AnimationName {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
   </style>
 </head>
 <body>
 <div id="app">
-  <div>
-    <h3>默认模板</h3>
-    <vue-countdown-timer
-      @start_callback="startCallBack('活动开始')"
-      @end_callback="endCallBack('活动结束')"
-      :current-time="1481450106"
-      :start-time="1481450110"
-      :end-time="1481450115"
-      :start-label="'距离开始文字1'"
-      :end-label="'距离结束文字1'"
-      :end-text="'结束自定义文字2'"
-      :day-txt="'天'"
-      :hour-txt="'小时'"
-      :minutes-txt="'分钟'"
-      :seconds-txt="'秒'">
-    </vue-countdown-timer>
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        Vuejs Countdown Timer
+      </a>
+
+      <ul class="navbar-nav d-inline-flex justify-content-end flex-row">
+        <li class="nav-item mr-3">
+          <a class="nav-link" href="#">Full Document</a>
+        </li>
+        <li class="nav-item mr-3">
+          <a class="nav-link" href="#">Github</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid gradient-background text-white">
+    <div class="container">
+      <h5 class="display-4">vuejs-countdown-timer <small>v2.0.0</small></h5>
+      <p class="lead">Vuejs event coutdown timer! Supports event labels, countdown till start and countdown till end!</p>
+    </div>
   </div>
 
-  <div>
-    <h3>自定义模板</h3>
-    <vue-countdown-timer
-      @start_callback="startCallBack('活动开始')" @end_callback="endCallBack('活动结束')"
-      :current-time="1481450106" :start-time="1481450110" :end-time="1481450115" :tip-text="'距离开始文字1'"
-      :tip-text-end="'距离结束文字1'" :end-text="'结束自定义文字2'" :day-txt="'天'" :hour-txt="'小时'" :minutes-txt="'分钟'"
-      :seconds-txt="'秒'">
-      <template slot-scope="scope">
-        <span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
-        <span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
-        <span v-if="scope.props.msTime.day>0"><span>{{scope.props.msTime.day}}</span><i>{{scope.props.dayTxt}}</i></span>
-        <span>{{scope.props.msTime.hour}}</span><i>{{scope.props.hourTxt}}</i>
-        <span>{{scope.props.msTime.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
-        <span>{{scope.props.msTime.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
-        <span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
-        <span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
-        <span v-if="!scope.props.msTime.show">{{scope.props.endText}}</span>
-      </template>
-    </vue-countdown-timer>
+  <div class="container">
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>Demo <small>English</small></h4>
+        <hr>
+        <vue-countdown-timer
+                @start_callback="startCallBack('活动开始')"
+                @end_callback="endCallBack('活动结束')"
+                :interval="100"
+                :start-time="startTime1"
+                :end-time="endTime1"
+                :start-label="'Till starts'"
+                :end-label="'Till ends'"
+                :end-text="'Ended'"
+                :day-txt="'days'"
+                :hour-txt="'hours'"
+                :minutes-txt="'minutes'"
+                :seconds-txt="'seconds'">
+        </vue-countdown-timer>
+        <!--<button type="button" class="btn btn-light mt-3" data-toggle="collapse" href="#englishCode" role="button" aria-expanded="false" aria-controls="englishCode">Show Code</button>-->
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>Demo <small>中文</small></h4>
+        <hr>
+        <vue-countdown-timer
+                @start_callback="startCallBack('活动开始')"
+                @end_callback="endCallBack('活动结束')"
+                :interval="100"
+                :start-time="startTime2"
+                :end-time="endTime2"
+                :start-label="'距离开始'"
+                :end-label="'距离结束'"
+                :end-text="'已结束'"
+                :day-txt="'天'"
+                :hour-txt="'小时'"
+                :minutes-txt="'分钟'"
+                :seconds-txt="'秒'">
+        </vue-countdown-timer>
+        <!--<button type="button" class="btn btn-light mt-3">查看代码</button>-->
+      </div>
+    </div>
   </div>
+
+  <!--<div>-->
+    <!--<h3>自定义模板</h3>-->
+    <!--<vue-countdown-timer-->
+      <!--@start_callback="startCallBack('活动开始')" @end_callback="endCallBack('活动结束')"-->
+      <!--:current-time="1481450106" :start-time="1481450110" :end-time="1481450115" :tip-text="'距离开始文字1'"-->
+      <!--:tip-text-end="'距离结束文字1'" :end-text="'结束自定义文字2'" :day-txt="'天'" :hour-txt="'小时'" :minutes-txt="'分钟'"-->
+      <!--:seconds-txt="'秒'">-->
+      <!--<template slot-scope="scope">-->
+        <!--<span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>-->
+        <!--<span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>-->
+        <!--<span v-if="scope.props.msTime.day>0"><span>{{scope.props.msTime.day}}</span><i>{{scope.props.dayTxt}}</i></span>-->
+        <!--<span>{{scope.props.msTime.hour}}</span><i>{{scope.props.hourTxt}}</i>-->
+        <!--<span>{{scope.props.msTime.minutes}}</span><i>{{scope.props.minutesTxt}}</i>-->
+        <!--<span>{{scope.props.msTime.seconds}}</span><i>{{scope.props.secondsTxt}}</i>-->
+        <!--<span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>-->
+        <!--<span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>-->
+        <!--<span v-if="!scope.props.msTime.show">{{scope.props.endText}}</span>-->
+      <!--</template>-->
+    <!--</vue-countdown-timer>-->
+  <!--</div>-->
 
 </div>
 <script>
   var app = new Vue({
     el: '#app',
     data() {
+      const now = new Date()
+      return {
+        startTime1: new Date(now.getTime() + (1000 * 10)),
+        endTime1: new Date(now.getTime() + (1000 * 20)),
+        startTime2: new Date(now.getTime() + (1000 * 30)),
+        endTime2: new Date(now.getTime() + (1000 * 40))
+      }
     },
     methods: {
       startCallBack: function (msg) {
@@ -82,5 +168,11 @@
 
   Vue.use(VueCountdownTimer)
 </script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/highlightjs@9.10.0/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 (Sep 4, 2018)
+
+- Complete rewrite of the foundation code
+- `start-time` and `end-time` supports timestamp format and string timestamp
+- Added millisecond timers, use with `interval` props
+- Added `interval` props for millisecond timer feature, default `1000` ms
+- Removed `current-time` props, default gets current real time `new Date()`
+
 ## 1.0.5 (Aus 31, 2018)
 
 - Changed `tip-text` to `start-label` and `tip-text-end` to `end-label` .

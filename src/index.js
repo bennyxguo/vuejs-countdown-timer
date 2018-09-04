@@ -1,5 +1,10 @@
 import CountdownTimerComponent from './countdownTimer.vue'
 
+const MILLISECONDS_SECOND = 1000;
+const MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
+const MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
+const MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
+
 const VueCountdownTimer = {
   install(Vue, options) {
     Vue.component('VueCountdownTimer', {
@@ -17,23 +22,23 @@ const VueCountdownTimer = {
           type: String,
           default: 'begin'
         },
-        id: {
-          type: String,
-          default: function () {
-            return '1'
-          }
-        },
-        currentTime: {
+        interval: {
           type: Number,
           default: function () {
-            return new Date().getTime()
+            return 1000
+          }
+        },
+        leadingZero: {
+          type: Boolean,
+          default: function () {
+            return true
           }
         },
         startTime: {
-          type: Number
+          type: Number|String
         },
         endTime: {
-          type: Number
+          type: Number|String
         },
         endText: {
           type: String,
@@ -74,130 +79,307 @@ const VueCountdownTimer = {
       },
       data() {
         return {
-          tipShow: true,
-          msTime: { // 倒计时数值
-            show: false, // 倒计时状态
-            day: '', // 天
-            hour: '', // 小时
-            minutes: '', // 分钟
-            seconds: ''	// 秒
-          },
-          star: '',	// 活动开始时间
-          end: '', // 活动结束时间
-          current: '', // 当前时间
+          tips: true,
+          current: '',
+          count: 0, // 现在倒计时剩余毫秒数
+          counting: false // 是否已经在倒计
         }
       },
-      watch: {
-        currentTime: function (val, oldval) {
-          this.gogogo();
-        }
-      },
-      mounted () {
-        this.gogogo();
+      computed: {
+        /**
+         * Remaining days.
+         * @returns {number}
+         */
+        days() {
+          return this.preprocess(Math.floor(this.count / MILLISECONDS_DAY));
+        },
+
+        /**
+         * Remaining hours.
+         * @returns {number}
+         */
+        hours() {
+          return this.preprocess(Math.floor((this.count % MILLISECONDS_DAY) / MILLISECONDS_HOUR));
+        },
+
+        /**
+         * Remaining minutes.
+         * @returns {number}
+         */
+        minutes() {
+          return this.preprocess(Math.floor((this.count % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE));
+        },
+
+        /**
+         * Remaining seconds.
+         * @returns {number}
+         */
+        seconds() {
+          const { interval } = this;
+          const seconds = (this.count % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
+
+          if (interval < 10) {
+            return this.preprocess(parseFloat(seconds.toFixed(3)));
+          } else if (interval >= 10 && interval < 100) {
+            return this.preprocess(parseFloat(seconds.toFixed(2)));
+          } else if (interval >= 100 && interval < 1000) {
+            return this.preprocess(parseFloat(seconds.toFixed(1)));
+          }
+
+          return this.preprocess(Math.floor(seconds));
+        },
+
+        /**
+         * Total remaining days.
+         * @returns {number}
+         */
+        totalDays() {
+          return this.preprocess(this.days);
+        },
+
+        /**
+         * Total remaining hours.
+         * @returns {number}
+         */
+        totalHours() {
+          return this.preprocess(Math.floor(this.count / MILLISECONDS_HOUR));
+        },
+
+        /**
+         * Total remaining minutes.
+         * @returns {number}
+         */
+        totalMinutes() {
+          return this.preprocess(Math.floor(this.count / MILLISECONDS_MINUTE));
+        },
+
+        /**
+         * Total remaining seconds.
+         * @returns {number}
+         */
+        totalSeconds() {
+          const { interval } = this;
+          const seconds = this.count / MILLISECONDS_SECOND;
+
+          if (interval < 10) {
+            return this.preprocess(parseFloat(seconds.toFixed(3)));
+          } else if (interval >= 10 && interval < 100) {
+            return this.preprocess(parseFloat(seconds.toFixed(2)));
+          } else if (interval >= 100 && interval < 1000) {
+            return this.preprocess(parseFloat(seconds.toFixed(1)));
+          }
+
+          return this.preprocess(Math.floor(seconds));
+        },
+
+        /**
+         * Current time in milliseconds
+         * 当前时间
+         * @returns {number}
+         */
+        time() {
+          return new Date().getTime();
+        },
+
+        /**
+         * 当前活动状态
+         * @returns {number}
+         */
+        status() {
+          // 当前时间已经大于结束时间 - 活动已结束
+          if (this.current > new Date(this.endTime).getTime()) {
+            return 0;
+          }
+
+          // 当前时间小于开始时间 活动尚未开始
+          if (this.current < new Date(this.startTime).getTime()) {
+            return 1;
+          }
+
+          // 结束时间大于当前并且开始时间小于当前时间，执行活动开始倒计时
+          if (this.current >= new Date(this.startTime).getTime() && this.current < new Date(this.endTime).getTime()) {
+            return 2;
+          }
+        },
+
       },
       methods: {
-        gogogo: function () {
-          //判断是秒还是毫秒
-          if (this.startTime.toString().length === 10) {
-            this.star = this.startTime * 1000
-          } else {
-            this.star = this.startTime
-          }
+        /**
+         * Initial countdown
+         * 初始化倒计时
+         */
+        init() {
+          // Formating time - 格式化时间格式
+          this.stop();
+          this.$set(this, 'current', new Date().getTime())
+          const startCount = new Date(this.startTime).getTime() - this.current;
+          const endCount = new Date(this.endTime).getTime() - this.current;
 
-          if (this.endTime.toString().length === 10) {
-            this.end = this.endTime * 1000
-          } else {
-            this.end = this.endTime
-          }
+          const { status } = this;
 
-          if (this.currentTime.toString().length === 10) {
-            this.current = this.currentTime * 1000
-          } else {
-            this.current = this.currentTime
-          }
-
-          if (this.end < this.current) {
-            /**
-             * 结束时间小于当前时间 活动已结束
-             */
-            this.msTime.show = false;
+          if (status === 0) {
+            this.count = 0;
             this.end_message();
+            return;
           }
-          else if (this.current < this.star) {
-            /**
-             * 当前时间小于开始时间 活动尚未开始
-             */
-            this.$set(this, 'tipShow', true);
-            setTimeout(() => {
-              this.runTime(this.star, this.current, this.start_message);
-            }, 1);
-          }
-          else if (this.end > this.current && this.star < this.current || this.star == this.current) {
-            /**
-             * 结束时间大于当前并且开始时间小于当前时间，执行活动开始倒计时
-             */
-            this.$set(this, 'tipShow', false);
-            this.msTime.show = true;
-            this.$emit('start_callback', this.msTime.show);
-            setTimeout(() => {
-              this.runTime(this.end, this.star, this.end_message, true)
-            }, 1);
-          }
-        },
-        runTime (startTime, endTime, callFun, type) {
-          let msTime = this.msTime;
-          let timeDistance = startTime - endTime;
-          if (timeDistance > 0) {
-            this.msTime.show = true;
-            msTime.day = Math.floor(timeDistance / 86400000);
-            timeDistance -= msTime.day * 86400000;
-            msTime.hour = Math.floor(timeDistance / 3600000);
-            timeDistance -= msTime.hour * 3600000;
-            msTime.minutes = Math.floor(timeDistance / 60000);
-            timeDistance -= msTime.minutes * 60000;
-            //是否开启秒表倒计,未完成
-//                    this.secondsFixed ? msTime.seconds = new Number(timeDistance / 1000).toFixed(2) : msTime.seconds = Math.floor( timeDistance / 1000 ).toFixed(0);
-            msTime.seconds = Math.floor(timeDistance / 1000).toFixed(0);
-            timeDistance -= msTime.seconds * 1000;
 
-            if (msTime.hour < 10) {
-              msTime.hour = "0" + msTime.hour;
-            }
-            if (msTime.minutes < 10) {
-              msTime.minutes = "0" + msTime.minutes;
-            }
-            if (msTime.seconds < 10) {
-              msTime.seconds = "0" + msTime.seconds;
-            }
-            let _s = Date.now();
-            let _e = Date.now();
-            let diffPerFunc = _e - _s;
-            setTimeout(() => {
-              if (type) {
-                this.runTime(this.end, endTime += 1000, callFun, true);
-              } else {
-                this.runTime(this.star, endTime += 1000, callFun);
-              }
-            }, 1000 - diffPerFunc)
+          if (status === 1) {
+            this.$set(this, 'tips', true);
+            this.count = Math.max(0, startCount);
           }
-          else {
-            callFun();
+
+          if (status === 2) {
+            this.$set(this, 'tips', false);
+            this.$emit('start_callback', status);
+            this.count = Math.max(0, endCount);
+          }
+
+          if (this.count === 0) {
+            this.end_message();
+            return;
+          }
+
+          this.$nextTick(() => {
+            this.start();
+          });
+        },
+
+        /**
+         * Start countdown
+         * 开始倒计时
+         */
+        start () {
+          if (this.counting) {
+            return;
+          }
+
+          this.counting = true;
+          this.next();
+        },
+
+        /**
+         * Next count down queue
+         * 进入下一个倒计时队列
+         */
+        next() {
+          this.timeout = setTimeout(this.step.bind(this), this.interval);
+        },
+
+        /**
+         * Calculate remaining milliseconds
+         * 重新计算剩余时间 - 毫秒
+         */
+        step() {
+          if (!this.counting) {
+            return;
+          }
+
+          if (this.count > this.interval) {
+            this.count -= this.interval;
+            this.next();
+          } else {
+            this.count = 0;
+            this.init();
           }
         },
+
+        /**
+         * Stop the countdown
+         * 停止倒计时
+         */
+        stop() {
+          this.counting = false;
+          clearTimeout(this.timeout);
+          this.timeout = undefined;
+        },
+
         start_message () {
-          this.$set(this, 'tipShow', false);
-          this.$emit('start_callback', this.msTime.show);
-          setTimeout(() => {
-            this.runTime(this.end, this.star, this.end_message, true)
-          }, 1);
+          this.$set(this, 'tips', false);
+          this.$emit('start_callback', this.status);
         },
+
         end_message(){
-          this.msTime.show = false;
           if (this.currentTime <= 0) {
             return;
           }
-          this.$emit('end_callback', this.msTime.show);
+          this.$emit('end_callback', this.status);
+        },
+
+        formatTime(time) {
+          if (typeof time === 'number') {
+            if (time.toString().length === 10) {
+              return time * 1000
+            } else {
+              return time
+            }
+          } else {
+            return time
+          }
+        },
+
+        /**
+         * Filling zeros
+         * @returns {string}
+         */
+        preprocess(value) {
+          return (this.leadingZero && value < 10 ? `0${value}` : value);
+        },
+
+        /**
+         * Update the count.
+         * @private
+         */
+        update() {
+          if (this.counting) {
+            // Formating time - 格式化时间格式
+            this.$set(this, 'current', this.time)
+            const startCount = new Date(this.startTime).getTime() - this.current;
+            const endCount = new Date(this.endTime).getTime() - this.current;
+
+            const { status } = this;
+
+            if (status === 0) {
+              this.count = 0;
+              this.stop();
+              this.end_message();
+              return;
+            }
+
+            if (status === 1) {
+              this.$set(this, 'tips', true);
+              this.count = Math.max(0, startCount);
+            }
+
+            if (status === 2) {
+              this.$set(this, 'tips', false);
+              this.$emit('start_callback', this.status);
+              this.count = Math.max(0, endCount);
+            }
+          }
         }
+      },
+
+      watch: {
+        startTime() {
+          this.init();
+        },
+
+        endTime() {
+          this.init();
+        },
+      },
+
+      created() {
+        this.init();
+      },
+
+      mounted() {
+        window.addEventListener('focus', (this.onFocus = this.update.bind(this)));
+      },
+
+      beforeDestroy() {
+        window.removeEventListener('focus', this.onFocus);
+        clearTimeout(this.timeout);
       }
     })
   }

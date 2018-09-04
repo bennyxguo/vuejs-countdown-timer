@@ -13,11 +13,15 @@
   <a href="https://www.npmjs.com/package/vue-photoswipes">
     <img src="https://img.shields.io/npm/dt/vuejs-countdown-timer.svg" alt="Npm downloads">
   </a>
+  <a>
+    <img src="https://img.shields.io/npm/v/vuejs-countdown-timer.svg" alt="Npm version">
+  </a>
 </p>
 
 > 一 Vue 2 countdown and timer component
 
 [📙中文文档](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README_CN.md)
+[📙Changelog](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 
 ## Installation
 
@@ -59,9 +63,9 @@ Vue template
 <vue-countdown-timer
   @start_callback="startCallBack('event started')"
   @end_callback="endCallBack('event ended')"
-  :current-time="1481450106"
-  :start-time="1481450110"
+  :start-time="'2018-10-10 00:00:00'"
   :end-time="1481450115"
+  :interval="1000"
   :start-label="'Until start:'"
   :end-label="'Until end:'"
   label-position="begin"
@@ -75,18 +79,18 @@ Vue template
 
 ### Props
 
-**current-time**
-- `type`: Number
-- `required` : false
-- `default`: `new Date().getTime()`
-
 **start-time**
-- `type`: Number
+- `type`: Number|String
 - `required` : true
 
 **end-time**
-- `type`: Number
+- `type`: Number|String
 - `required` : true
+
+**interval**
+- `type`: Number
+- `required` : false
+- `default` : 1000
 
 **start-label**
 - `type`: String

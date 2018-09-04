@@ -1,47 +1,47 @@
 <template>
   <div>
     <slot
-      v-if="msTime.show"
+      v-if="status > 0"
       name="start-label"
       v-bind:props="{
-      tipShow,
+      tips,
       startLabel,
       labelPosition
     }">
-      <span v-if="startLabel !== '' && tipShow && labelPosition === 'begin'">{{startLabel}}:</span>
-      <span v-if="endLabel !== '' && !tipShow && labelPosition === 'begin'">{{endLabel}}:</span>
+      <span v-if="startLabel !== '' && tips && labelPosition === 'begin'">{{startLabel}}:</span>
+      <span v-if="endLabel !== '' && !tips && labelPosition === 'begin'">{{endLabel}}:</span>
     </slot>
 
     <slot
-      v-if="msTime.show"
+      v-if="status > 0"
       name="countdown"
       v-bind:props="{
-      msTime,
+      status,
       dayTxt,
       hourTxt,
       minutesTxt,
       secondsTxt,
       endText
     }">
-      <span v-if="msTime.day>0"><span>{{msTime.day}}</span><i>{{dayTxt}}</i></span>
-      <span>{{msTime.hour}}</span><i>{{hourTxt}}</i>
-      <span>{{msTime.minutes}}</span><i>{{minutesTxt}}</i>
-      <span>{{msTime.seconds}}</span><i>{{secondsTxt}}</i>
+      <span v-if="days !== '00'"><span>{{days}}</span><i>{{dayTxt}}</i></span>
+      <span>{{hours}}</span><i>{{hourTxt}}</i>
+      <span>{{minutes}}</span><i>{{minutesTxt}}</i>
+      <span>{{seconds}}</span><i>{{secondsTxt}}</i>
     </slot>
 
     <slot
-      v-if="msTime.show"
+      v-if="status > 0"
       name="end-label"
       v-bind:props="{
-      tipShow,
+      tips,
       endLabel,
       labelPosition
     }">
-      <span v-if="startLabel !== '' && tipShow && labelPosition === 'end'">{{startLabel}}:</span>
-      <span v-if="endLabel !== '' && !tipShow && labelPosition === 'end'">{{endLabel}}:</span>
+      <span v-if="startLabel !== '' && tips && labelPosition === 'end'">{{startLabel}}:</span>
+      <span v-if="endLabel !== '' && !tips && labelPosition === 'end'">{{endLabel}}:</span>
     </slot>
 
-    <slot name="end-text" v-if="!msTime.show" v-bind:props="{endText}">
+    <slot name="end-text" v-if="status <=0" v-bind:props="{endText}">
       {{endText}}
     </slot>
   </div>

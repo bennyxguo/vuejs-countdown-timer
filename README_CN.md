@@ -13,11 +13,15 @@
   <a href="https://www.npmjs.com/package/vue-photoswipes">
     <img src="https://img.shields.io/npm/dt/vuejs-countdown-timer.svg" alt="Npm downloads">
   </a>
+  <a>
+    <img src="https://img.shields.io/npm/v/vuejs-countdown-timer.svg" alt="Npm version">
+  </a>
 </p>
 
 > 一 Vue 2 活动倒计时组件
 
 [📙English Doc](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README.md)
+[📙更新日志](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 
 ## 安装
 
@@ -77,18 +81,18 @@ Vue template
 
 ### 属性 (props)
 
-**current-time** - 当前时间戳,如果不传,默认获取用户本地的时间(建议传服务器的当前时间) 
-- `type`: Number
-- `required` : false
-- `default`: `new Date().getTime()`
-
 **start-time** - 开始时间戳
-- `type`: Number
+- `type`: Number|String
 - `required` : true
 
 **end-time** - 结束时间戳
-- `type`: Number
+- `type`: Number|String
 - `required` : true
+
+**interval** - 倒计时速度 - 用于setTimer的interval（使用100 会有毫秒倒计）
+- `type`: Number
+- `required` : false
+- `default` : 1000
 
 **start-label** - 开始倒计时之前的提示文字
 - `type`: String
