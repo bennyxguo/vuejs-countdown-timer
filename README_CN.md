@@ -20,6 +20,7 @@
 
 > 一 Vue 2 活动倒计时组件
 
+[Demo](https://tridiamond.github.io/vuejs-countdown-timer/)
 [📙English Doc](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README.md)
 [📙更新日志](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 
@@ -65,9 +66,9 @@ Vue template
 <vue-countdown-timer
   @start_callback="startCallBack('活动开始')"
   @end_callback="endCallBack('活动结束')"
-  :current-time="1481450106"
   :start-time="1481450110"
-  :end-time="1481450115"
+  :end-time="'2018-09-04 00:00:00'"
+  :interval="1000"
   :start-label="'距离开始:'"
   :end-label="'距离结束:'"
   label-position="begin"

@@ -20,6 +20,7 @@
 
 > 一 Vue 2 countdown and timer component
 
+[Demo](https://tridiamond.github.io/vuejs-countdown-timer/)
 [📙中文文档](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README_CN.md)
 [📙Changelog](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 

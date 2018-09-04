@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1 (Sep 4, 2018)
+- Removed console.logs
+- Added demo link to documents
+
 ## 2.0.0 (Sep 4, 2018)
 
 - Complete rewrite of the foundation code
