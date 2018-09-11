@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.2 (Sep 10, 2018)
+- Added timestamp conversion, if timestamp is less than 14digits, will automatically add 000 to the end.
+
 ## 2.0.1 (Sep 4, 2018)
 - Removed console.logs
 - Added demo link to documents

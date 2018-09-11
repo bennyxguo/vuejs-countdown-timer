@@ -212,8 +212,8 @@ const VueCountdownTimer = {
           // Formating time - 格式化时间格式
           this.stop();
           this.$set(this, 'current', new Date().getTime())
-          const startCount = new Date(this.startTime).getTime() - this.current;
-          const endCount = new Date(this.endTime).getTime() - this.current;
+          const startCount = new Date(this.formatTime(this.startTime)).getTime() - this.current;
+          const endCount = new Date(this.formatTime(this.endTime)).getTime() - this.current;
 
           const { status } = this;
 

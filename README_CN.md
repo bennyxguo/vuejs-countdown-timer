@@ -10,7 +10,7 @@
   <a>
     <img src="https://img.shields.io/github/license/TriDiamond/vuejs-countdown-timer.svg" alt="License">
   </a>
-  <a href="https://www.npmjs.com/package/vue-photoswipes">
+  <a href="https://www.npmjs.com/package/vuejs-countdown-timer">
     <img src="https://img.shields.io/npm/dt/vuejs-countdown-timer.svg" alt="Npm downloads">
   </a>
   <a>
