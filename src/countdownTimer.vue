@@ -6,6 +6,7 @@
       v-bind:props="{
       tips,
       startLabel,
+      endLabel,
       labelPosition
     }">
       <span v-if="startLabel !== '' && tips && labelPosition === 'begin'">{{startLabel}}:</span>
@@ -17,13 +18,16 @@
       name="countdown"
       v-bind:props="{
       status,
+      days,
+      hours,
+      minutes,
+      seconds,
       dayTxt,
       hourTxt,
       minutesTxt,
-      secondsTxt,
-      endText
+      secondsTxt
     }">
-      <span v-if="days !== '00'"><span>{{days}}</span><i>{{dayTxt}}</i></span>
+      <span>{{days}}</span><i>{{dayTxt}}</i>
       <span>{{hours}}</span><i>{{hourTxt}}</i>
       <span>{{minutes}}</span><i>{{minutesTxt}}</i>
       <span>{{seconds}}</span><i>{{secondsTxt}}</i>
@@ -34,6 +38,7 @@
       name="end-label"
       v-bind:props="{
       tips,
+      startLabel,
       endLabel,
       labelPosition
     }">

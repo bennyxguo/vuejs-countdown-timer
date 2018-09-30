@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.3 (Sep 30, 2018)
+- Day won't be hidden even day is 00
+- Changed the props value injected for slot `countdown`
+- Added custom template usage document
+
 ## 2.0.2 (Sep 10, 2018)
 - Added timestamp conversion, if timestamp is less than 14digits, will automatically add 000 to the end.
 

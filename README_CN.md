@@ -60,25 +60,99 @@ methods: {
 }
 ```
 
-Vue template
+Vue default template
 
 ```vue
 <vue-countdown-timer
-  @start_callback="startCallBack('活动开始')"
-  @end_callback="endCallBack('活动结束')"
-  :start-time="1481450110"
-  :end-time="'2018-09-04 00:00:00'"
+  @start_callback="startCallBack('event started')"
+  @end_callback="endCallBack('event ended')"
+  :start-time="'2018-10-10 00:00:00'"
+  :end-time="1481450115"
   :interval="1000"
-  :start-label="'距离开始:'"
-  :end-label="'距离结束:'"
+  :start-label="'Until start:'"
+  :end-label="'Until end:'"
   label-position="begin"
-  :end-text="'活动已结束'"
-  :day-txt="'天'"
-  :hour-txt="'小时'"
-  :minutes-txt="'分钟'"
-  :seconds-txt="'秒'">
+  :end-text="'Event ended!'"
+  :day-txt="'days'"
+  :hour-txt="'hours'"
+  :minutes-txt="'minutes'"
+  :seconds-txt="'seconds'">
 </vue-countdown-timer>
 ```
+
+Vue Customized template
+```vue
+<vue-countdown-timer
+  @start_callback="startCallBack('event started')"
+  @end_callback="endCallBack('event ended')"
+  :start-time="'2018-10-10 00:00:00'"
+  :end-time="1481450115"
+  :interval="1000"
+  :start-label="'Until start:'"
+  :end-label="'Until end:'"
+  label-position="begin"
+  :end-text="'Event ended!'"
+  :day-txt="'days'"
+  :hour-txt="'hours'"
+  :minutes-txt="'minutes'"
+  :seconds-txt="'seconds'">
+  <template slot="start-label" slot-scope="scope">
+    <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+    <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
+  </template>
+  
+  <template slot="countdown" slot-scope="scope">
+    <span>{{scope.props.days}}</span><i>{{scope.props.dayTxt}}</i>
+    <span>{{scope.props.hours}}</span><i>{{scope.props.hourTxt}}</i>
+    <span>{{scope.props.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
+    <span>{{scope.props.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+  </template>
+  
+  <template slot="end-label" slot-scope="scope">
+    <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
+    <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
+  </template>
+  
+  <template slot="end-text" slot-scope="scope">
+    <span style="color: green">{{ scope.props.endText}}</span>
+  </template>
+</vue-countdown-timer>
+```
+
+### Slots
+| Slot 名           | 描述                   |
+|-------------------|-----------------------|
+| start-label       | 倒计时前缀标记          |
+| countdown         | 倒计时                 |
+| end-label         | 倒计时后缀标记          |
+
+### `start-label` Scoped Slot
+| Scope 名          | 描述                                                                        |
+|-------------------|----------------------------------------------------------------------------|
+| startLabel        | 倒计时前缀标记                                                               |
+| endLabel          | 倒计时后缀标记                                                               |
+| tips              | Tips `true` 指倒计到开始, `false` 指倒计到结束                                |
+| labelPosition     | 倒计时标记位置, `'begin'` 放在前缀 或者 `'end'` 放在后缀                       |
+
+### `countdown` Scoped Slot
+| Scope 名          | 描述                                                                        |
+|-------------------|----------------------------------------------------------------------------|
+| days              | 倒计天数                                                                    |
+| dayTxt            | 天数的单位                                                                  |
+| hours             | 倒计小时数                                                                  |
+| hourTxt           | 小时数单位                                                                  |
+| minutes           | 倒计分钟数                                                                  |
+| minuteTxt         | 分钟数单位                                                                  |
+| seconds           | 倒计秒数                                                                    |
+| secondTxt         | 秒数单位                                                                    |
+
+### `end-label` Scoped Slot
+| Scope 名          | 描述                                                                        |
+|-------------------|----------------------------------------------------------------------------|
+| startLabel        | 倒计时前缀标记                                                               |
+| endLabel          | 倒计时后缀标记                                                               |
+| tips              | Tips `true` 指倒计到开始, `false` 指倒计到结束                                |
+| labelPosition     | 倒计时标记位置, `'begin'` 放在前缀 或者 `'end'` 放在后缀                       |
 
 ### 属性 (props)
 

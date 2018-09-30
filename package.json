@@ -1,6 +1,6 @@
 {
   "name": "vuejs-countdown-timer",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Vue 2 countdown and timer component",
   "main": "/dist/vuejs-countdown-timer.min.js",
   "scripts": {
@@ -35,8 +35,8 @@
     "vue": "^2.5.13",
     "vue-loader": "^14.1.1",
     "vue-template-compiler": "^2.5.13",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10",
+    "webpack": "4.19.1",
+    "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {}

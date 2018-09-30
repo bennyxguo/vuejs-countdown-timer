@@ -12,6 +12,10 @@
       height: 100%;
       overflow: hidden;
     }
+    i {
+      font-style: normal;
+      padding-left: 3px;
+    }
     .gradient-background {
       background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
       background-size: 300% 300%;
@@ -62,7 +66,7 @@
 
   <div class="jumbotron jumbotron-fluid gradient-background text-white">
     <div class="container">
-      <h5 class="display-4">vuejs-countdown-timer <small>v2.0.2</small></h5>
+      <h5 class="display-4">vuejs-countdown-timer <small>v2.0.3</small></h5>
       <p class="lead">Vuejs event coutdown timer! Supports event labels, countdown till start and countdown till end!</p>
     </div>
   </div>
@@ -106,7 +110,47 @@
                 :minutes-txt="'minutes'"
                 :seconds-txt="'seconds'">
         </vue-countdown-timer>
-        <!--<button type="button" class="btn btn-light mt-3" data-toggle="collapse" href="#englishCode" role="button" aria-expanded="false" aria-controls="englishCode">Show Code</button>-->
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>Demo <small>Custom template</small></h4>
+        <hr>
+        <vue-countdown-timer
+                @start_callback="startCallBack('活动开始')"
+                @end_callback="endCallBack('活动结束')"
+                :interval="100"
+                :start-time="startTime1"
+                :end-time="endTime1"
+                :start-label="'Till starts'"
+                :end-label="'Till ends'"
+                :end-text="'Ended'"
+                :day-txt="'days'"
+                :hour-txt="'hours'"
+                :minutes-txt="'minutes'"
+                :seconds-txt="'seconds'">
+          <template slot="start-label" slot-scope="scope">
+            <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+            <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
+          </template>
+
+          <template slot="countdown" slot-scope="scope">
+            <span class="badge badge-secondary">{{scope.props.days}}</span><i>{{scope.props.dayTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.hours}}</span><i>{{scope.props.hourTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+          </template>
+
+          <template slot="end-label" slot-scope="scope">
+            <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
+            <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
+          </template>
+
+          <template slot="end-text" slot-scope="scope">
+            <span style="color: green">{{ scope.props.endText}}</span>
+          </template>
+        </vue-countdown-timer>
       </div>
     </div>
 
@@ -128,31 +172,50 @@
                 :minutes-txt="'分钟'"
                 :seconds-txt="'秒'">
         </vue-countdown-timer>
-        <!--<button type="button" class="btn btn-light mt-3">查看代码</button>-->
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>Demo <small>自定义模板</small></h4>
+        <hr>
+        <vue-countdown-timer
+                @start_callback="startCallBack('活动开始')"
+                @end_callback="endCallBack('活动结束')"
+                :interval="100"
+                :start-time="startTime2"
+                :end-time="endTime2"
+                :start-label="'距离开始'"
+                :end-label="'距离结束'"
+                :end-text="'已结束'"
+                :day-txt="'天'"
+                :hour-txt="'小时'"
+                :minutes-txt="'分钟'"
+                :seconds-txt="'秒'">
+          <template slot="start-label" slot-scope="scope">
+            <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+            <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
+          </template>
+
+          <template slot="countdown" slot-scope="scope">
+            <span class="badge badge-secondary">{{scope.props.days}}</span><i>{{scope.props.dayTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.hours}}</span><i>{{scope.props.hourTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
+            <span class="badge badge-secondary">{{scope.props.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+          </template>
+
+          <template slot="end-label" slot-scope="scope">
+            <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
+            <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
+          </template>
+
+          <template slot="end-text" slot-scope="scope">
+            <span style="color: green">{{ scope.props.endText}}</span>
+          </template>
+        </vue-countdown-timer>
       </div>
     </div>
   </div>
-
-  <!--<div>-->
-    <!--<h3>自定义模板</h3>-->
-    <!--<vue-countdown-timer-->
-      <!--@start_callback="startCallBack('活动开始')" @end_callback="endCallBack('活动结束')"-->
-      <!--:current-time="1481450106" :start-time="1481450110" :end-time="1481450115" :tip-text="'距离开始文字1'"-->
-      <!--:tip-text-end="'距离结束文字1'" :end-text="'结束自定义文字2'" :day-txt="'天'" :hour-txt="'小时'" :minutes-txt="'分钟'"-->
-      <!--:seconds-txt="'秒'">-->
-      <!--<template slot-scope="scope">-->
-        <!--<span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>-->
-        <!--<span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>-->
-        <!--<span v-if="scope.props.msTime.day>0"><span>{{scope.props.msTime.day}}</span><i>{{scope.props.dayTxt}}</i></span>-->
-        <!--<span>{{scope.props.msTime.hour}}</span><i>{{scope.props.hourTxt}}</i>-->
-        <!--<span>{{scope.props.msTime.minutes}}</span><i>{{scope.props.minutesTxt}}</i>-->
-        <!--<span>{{scope.props.msTime.seconds}}</span><i>{{scope.props.secondsTxt}}</i>-->
-        <!--<span v-if="scope.props.startLabel !== '' && scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>-->
-        <!--<span v-if="scope.props.endLabel !== '' && !scope.props.tipShow && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>-->
-        <!--<span v-if="!scope.props.msTime.show">{{scope.props.endText}}</span>-->
-      <!--</template>-->
-    <!--</vue-countdown-timer>-->
-  <!--</div>-->
 
 </div>
 <script>
