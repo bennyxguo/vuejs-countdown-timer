@@ -41,80 +41,103 @@ npm i vuejs-countdown-timer -S
 
 ### Install component and Usage
 
-Javascript
+Import component
 
-``` javascript
-// global register
+```es6
+// global register at main.js
 import VueCountdownTimer from 'vuejs-countdown-timer'
 Vue.use(VueCountdownTimer)
-
-methods: {
-  startCallBack: function (x) {
-    console.log(x)
-  },
-  endCallBack: function (x) {
-    console.log(x)
-  }
-}
 ```
 
 Vue default template
 
 ```vue
-<vue-countdown-timer
-  @start_callback="startCallBack('event started')"
-  @end_callback="endCallBack('event ended')"
-  :start-time="'2018-10-10 00:00:00'"
-  :end-time="1481450115"
-  :interval="1000"
-  :start-label="'Until start:'"
-  :end-label="'Until end:'"
-  label-position="begin"
-  :end-text="'Event ended!'"
-  :day-txt="'days'"
-  :hour-txt="'hours'"
-  :minutes-txt="'minutes'"
-  :seconds-txt="'seconds'">
-</vue-countdown-timer>
+<template>
+    <vue-countdown-timer
+      @start_callback="startCallBack('event started')"
+      @end_callback="endCallBack('event ended')"
+      :start-time="'2018-10-10 00:00:00'"
+      :end-time="1481450115"
+      :interval="1000"
+      :start-label="'Until start:'"
+      :end-label="'Until end:'"
+      label-position="begin"
+      :end-text="'Event ended!'"
+      :day-txt="'days'"
+      :hour-txt="'hours'"
+      :minutes-txt="'minutes'"
+      :seconds-txt="'seconds'">
+    </vue-countdown-timer>
+</template>
+
+<script >
+  export default {
+    name: 'Timer',
+    methods: {
+      startCallBack: function (x) {
+        console.log(x)
+      },
+      endCallBack: function (x) {
+        console.log(x)
+      }
+    }
+  }
+</script>
 ```
 
 Vue Customized template
 ```vue
-<vue-countdown-timer
-  @start_callback="startCallBack('event started')"
-  @end_callback="endCallBack('event ended')"
-  :start-time="'2018-10-10 00:00:00'"
-  :end-time="1481450115"
-  :interval="1000"
-  :start-label="'Until start:'"
-  :end-label="'Until end:'"
-  label-position="begin"
-  :end-text="'Event ended!'"
-  :day-txt="'days'"
-  :hour-txt="'hours'"
-  :minutes-txt="'minutes'"
-  :seconds-txt="'seconds'">
-  <template slot="start-label" slot-scope="scope">
-    <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
-    <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
-  </template>
+<template>
+    <vue-countdown-timer
+      @start_callback="startCallBack('event started')"
+      @end_callback="endCallBack('event ended')"
+      :start-time="'2018-10-10 00:00:00'"
+      :end-time="1481450115"
+      :interval="1000"
+      :start-label="'Until start:'"
+      :end-label="'Until end:'"
+      label-position="begin"
+      :end-text="'Event ended!'"
+      :day-txt="'days'"
+      :hour-txt="'hours'"
+      :minutes-txt="'minutes'"
+      :seconds-txt="'seconds'">
+      <template slot="start-label" slot-scope="scope">
+        <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.startLabel}}:</span>
+        <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'begin'">{{scope.props.endLabel}}:</span>
+      </template>
+    
+      <template slot="countdown" slot-scope="scope">
+        <span>{{scope.props.days}}</span><i>{{scope.props.dayTxt}}</i>
+        <span>{{scope.props.hours}}</span><i>{{scope.props.hourTxt}}</i>
+        <span>{{scope.props.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
+        <span>{{scope.props.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
+      </template>
+    
+      <template slot="end-label" slot-scope="scope">
+        <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
+        <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
+      </template>
+      
+      <template slot="end-text" slot-scope="scope">
+        <span style="color: green">{{ scope.props.endText}}</span>
+      </template>
+    </vue-countdown-timer>
+</template>
 
-  <template slot="countdown" slot-scope="scope">
-    <span>{{scope.props.days}}</span><i>{{scope.props.dayTxt}}</i>
-    <span>{{scope.props.hours}}</span><i>{{scope.props.hourTxt}}</i>
-    <span>{{scope.props.minutes}}</span><i>{{scope.props.minutesTxt}}</i>
-    <span>{{scope.props.seconds}}</span><i>{{scope.props.secondsTxt}}</i>
-  </template>
-
-  <template slot="end-label" slot-scope="scope">
-    <span style="color: red" v-if="scope.props.startLabel !== '' && scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.startLabel}}:</span>
-    <span style="color: blue" v-if="scope.props.endLabel !== '' && !scope.props.tips && scope.props.labelPosition === 'end'">{{scope.props.endLabel}}:</span>
-  </template>
-  
-  <template slot="end-text" slot-scope="scope">
-    <span style="color: green">{{ scope.props.endText}}</span>
-  </template>
-</vue-countdown-timer>
+<script >
+  export default {
+    name: 'Timer',
+    methods: {
+      startCallBack: function (x) {
+        console.log(x)
+      },
+      endCallBack: function (x) {
+        console.log(x)
+      }
+    }
+  }
+</script>
 ```
 
 ### Slots
