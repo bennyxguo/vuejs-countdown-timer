@@ -172,49 +172,6 @@ const VueCountdownTimer = {
         },
 
         /**
-         * Total remaining days.
-         * @returns {number}
-         */
-        totalDays() {
-          return this.preprocess(this.days);
-        },
-
-        /**
-         * Total remaining hours.
-         * @returns {number}
-         */
-        totalHours() {
-          return this.preprocess(Math.floor(this.count / MILLISECONDS_HOUR));
-        },
-
-        /**
-         * Total remaining minutes.
-         * @returns {number}
-         */
-        totalMinutes() {
-          return this.preprocess(Math.floor(this.count / MILLISECONDS_MINUTE));
-        },
-
-        /**
-         * Total remaining seconds.
-         * @returns {number}
-         */
-        totalSeconds() {
-          const { interval } = this;
-          const seconds = this.count / MILLISECONDS_SECOND;
-
-          if (interval < 10) {
-            return this.preprocess(parseFloat(seconds.toFixed(3)));
-          } else if (interval >= 10 && interval < 100) {
-            return this.preprocess(parseFloat(seconds.toFixed(2)));
-          } else if (interval >= 100 && interval < 1000) {
-            return this.preprocess(parseFloat(seconds.toFixed(1)));
-          }
-
-          return this.preprocess(Math.floor(seconds));
-        },
-
-        /**
          * Current time in milliseconds
          * 当前时间
          * @returns {number}
@@ -231,17 +188,17 @@ const VueCountdownTimer = {
         status() {
           // Current time is greater than event end time
           // 当前时间已经大于结束时间 - 活动已结束
-          if (this.current > new Date(this.endTime).getTime()) {
+          if (this.current > new Date(this.formatTime(this.endTime)).getTime()) {
             return 0;
           }
           // Current time is smaller than event start time
           // 当前时间小于开始时间 活动尚未开始
-          if (this.current < new Date(this.startTime).getTime()) {
+          if (this.current < new Date(this.formatTime(this.startTime)).getTime()) {
             return 1;
           }
           // Event end time is greater and smaller than current time
           // 结束时间大于当前并且开始时间小于当前时间，执行活动开始倒计时
-          if (this.current >= new Date(this.startTime).getTime() && this.current < new Date(this.endTime).getTime()) {
+          if (this.current >= new Date(this.formatTime(this.startTime)).getTime() && this.current < new Date(this.formatTime(this.endTime)).getTime()) {
             return 2;
           }
         },
@@ -267,10 +224,8 @@ const VueCountdownTimer = {
           // Formating time - 格式化时间格式
           this.stop();
           this.$set(this, 'current', new Date().getTime())
-          this.startTime = this.formatTime(this.startTime)
-          this.endTime = this.formatTime(this.endTime)
-          const startCount = new Date(this.startTime).getTime() - this.current;
-          const endCount = new Date(this.endTime).getTime() - this.current;
+          const startCount = new Date(this.formatTime(this.startTime)).getTime() - this.current;
+          const endCount = new Date(this.formatTime(this.endTime)).getTime() - this.current;
 
           const { status } = this;
 
@@ -337,10 +292,10 @@ const VueCountdownTimer = {
               if (Number(this.days) === 0) {
                 this.showDay = false
               }
-              if (Number(this.hours) === 0) {
+              if (!this.showDay && Number(this.hours) === 0) {
                 this.showHour = false
               }
-              if (Number(this.minutes) === 0) {
+              if (!this.showHour && Number(this.minutes) === 0) {
                 this.showMinute = false
               }
             }
@@ -408,8 +363,8 @@ const VueCountdownTimer = {
           if (this.counting) {
             // Formating time - 格式化时间格式
             this.$set(this, 'current', this.time)
-            const startCount = new Date(this.startTime).getTime() - this.current;
-            const endCount = new Date(this.endTime).getTime() - this.current;
+            const startCount = new Date(this.formatTime(this.startTime)).getTime() - this.current;
+            const endCount = new Date(this.formatTime(this.endTime)).getTime() - this.current;
 
             const { status } = this;
 

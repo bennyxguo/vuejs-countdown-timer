@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.1 (Feb 22, 2019)
+### Changes
+- Changed the hiding logic of 00s, only hide if all previous units are hidden.
+- Changed the modification of the prop value, to avoid props changes in methods.
+
 ## 2.1.0 (Feb 22, 2019)
 #### Features
 - Added the ability to auto hide when each unit's time reaches zero
