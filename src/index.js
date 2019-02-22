@@ -34,6 +34,12 @@ const VueCountdownTimer = {
             return true
           }
         },
+        showZero: {
+          type: Boolean,
+          default: function () {
+            return true
+          }
+        },
         startTime: {
           type: Number|String
         },
@@ -47,19 +53,19 @@ const VueCountdownTimer = {
           }
         },
         dayTxt: {
-          type: String,
+          type: String|null,
           default: function () {
             return ':'
           }
         },
         hourTxt: {
-          type: String,
+          type: String|null,
           default: function () {
             return ':'
           }
         },
         minutesTxt: {
-          type: String,
+          type: String|null,
           default: function () {
             return ':'
           }
@@ -82,7 +88,10 @@ const VueCountdownTimer = {
           tips: true,
           current: '',
           count: 0, // 现在倒计时剩余毫秒数
-          counting: false // 是否已经在倒计
+          counting: false, // 是否已经在倒计
+          showDay: true,
+          showHour: true,
+          showMinute: true
         }
       },
       computed: {
@@ -99,7 +108,12 @@ const VueCountdownTimer = {
          * @returns {number}
          */
         hours() {
-          return this.preprocess(Math.floor((this.count % MILLISECONDS_DAY) / MILLISECONDS_HOUR));
+          let hours = Math.floor((this.count % MILLISECONDS_DAY) / MILLISECONDS_HOUR);
+          // If disabled day display convert all days into hours
+          if (!this.dayTxt) {
+            hours = hours + Math.floor(this.count / MILLISECONDS_DAY) * 24;
+          }
+          return this.preprocess(hours)
         },
 
         /**
@@ -107,7 +121,22 @@ const VueCountdownTimer = {
          * @returns {number}
          */
         minutes() {
-          return this.preprocess(Math.floor((this.count % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE));
+          let minutes = Math.floor((this.count % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE);
+
+          if (!this.hourTxt) {
+            let days = Math.floor(this.count / MILLISECONDS_DAY)
+            let hours = Math.floor((this.count % MILLISECONDS_DAY) / MILLISECONDS_HOUR)
+            // Disabled hours but shows days
+            // Convert all hours into minutes
+            minutes = minutes + hours * 60
+            // Disabled both hours and shows
+            // Convert all days and hours into minutes
+            if (!this.dayTxt) {
+              minutes = minutes + (days * 24 * 60)
+            }
+          }
+
+          return this.preprocess(minutes)
         },
 
         /**
@@ -116,7 +145,20 @@ const VueCountdownTimer = {
          */
         seconds() {
           const { interval } = this;
-          const seconds = (this.count % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
+          let seconds = (this.count % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
+
+          if (!this.minutesTxt) {
+            let minutes = Math.floor((this.count % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE)
+            seconds = seconds + minutes * 60
+            if (!this.hourTxt) {
+              let hours = Math.floor((this.count % MILLISECONDS_DAY) / MILLISECONDS_HOUR)
+              seconds = seconds + hours * 60 * 60
+              if (!this.dayTxt) {
+                let days = Math.floor(this.count / MILLISECONDS_DAY)
+                seconds = seconds + days * 24 * 60 * 60
+              }
+            }
+          }
 
           if (interval < 10) {
             return this.preprocess(parseFloat(seconds.toFixed(3)));
@@ -182,20 +224,22 @@ const VueCountdownTimer = {
         },
 
         /**
+         * current event status
          * 当前活动状态
          * @returns {number}
          */
         status() {
+          // Current time is greater than event end time
           // 当前时间已经大于结束时间 - 活动已结束
           if (this.current > new Date(this.endTime).getTime()) {
             return 0;
           }
-
+          // Current time is smaller than event start time
           // 当前时间小于开始时间 活动尚未开始
           if (this.current < new Date(this.startTime).getTime()) {
             return 1;
           }
-
+          // Event end time is greater and smaller than current time
           // 结束时间大于当前并且开始时间小于当前时间，执行活动开始倒计时
           if (this.current >= new Date(this.startTime).getTime() && this.current < new Date(this.endTime).getTime()) {
             return 2;
@@ -209,11 +253,24 @@ const VueCountdownTimer = {
          * 初始化倒计时
          */
         init() {
+          if (!this.dayTxt) {
+            this.showDay = false
+          }
+
+          if (!this.hourTxt) {
+            this.showHour = false
+          }
+
+          if (!this.minutesTxt) {
+            this.showMinute = false
+          }
           // Formating time - 格式化时间格式
           this.stop();
           this.$set(this, 'current', new Date().getTime())
-          const startCount = new Date(this.formatTime(this.startTime)).getTime() - this.current;
-          const endCount = new Date(this.formatTime(this.endTime)).getTime() - this.current;
+          this.startTime = this.formatTime(this.startTime)
+          this.endTime = this.formatTime(this.endTime)
+          const startCount = new Date(this.startTime).getTime() - this.current;
+          const endCount = new Date(this.endTime).getTime() - this.current;
 
           const { status } = this;
 
@@ -275,6 +332,19 @@ const VueCountdownTimer = {
           }
 
           if (this.count > this.interval) {
+            // Update 00 display status
+            if (!this.showZero) {
+              if (Number(this.days) === 0) {
+                this.showDay = false
+              }
+              if (Number(this.hours) === 0) {
+                this.showHour = false
+              }
+              if (Number(this.minutes) === 0) {
+                this.showMinute = false
+              }
+            }
+
             this.count -= this.interval;
             this.next();
           } else {
@@ -305,6 +375,11 @@ const VueCountdownTimer = {
           this.$emit('end_callback', this.status);
         },
 
+        /**
+         * Format time into unique format
+         * @param time
+         * @returns {*}
+         */
         formatTime(time) {
           if (typeof time === 'number') {
             if (time.toString().length === 10) {

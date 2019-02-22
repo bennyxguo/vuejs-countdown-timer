@@ -10,7 +10,6 @@
   <style>
     html, body {
       height: 100%;
-      overflow: hidden;
     }
     i {
       font-style: normal;
@@ -66,7 +65,7 @@
 
   <div class="jumbotron jumbotron-fluid gradient-background text-white">
     <div class="container">
-      <h5 class="display-4">vuejs-countdown-timer <small>v2.0.3</small></h5>
+      <h5 class="display-4">vuejs-countdown-timer <small>v2.1.0</small></h5>
       <p class="lead">Vuejs event coutdown timer! Supports event labels, countdown till start and countdown till end!</p>
     </div>
   </div>
@@ -94,11 +93,11 @@
 
     <div class="row mb-5">
       <div class="col">
-        <h4>Demo <small>English</small></h4>
+        <h4>Default template<small></small></h4>
         <hr>
         <vue-countdown-timer
-                @start_callback="startCallBack('活动开始')"
-                @end_callback="endCallBack('活动结束')"
+                @start_callback="startCallBack('event started')"
+                @end_callback="endCallBack('event ended')"
                 :interval="100"
                 :start-time="startTime1"
                 :end-time="endTime1"
@@ -115,11 +114,11 @@
 
     <div class="row mb-5">
       <div class="col">
-        <h4>Demo <small>Custom template</small></h4>
+        <h4>Custom template <small></small></h4>
         <hr>
         <vue-countdown-timer
-                @start_callback="startCallBack('活动开始')"
-                @end_callback="endCallBack('活动结束')"
+                @start_callback="startCallBack('event started')"
+                @end_callback="endCallBack('event ended')"
                 :interval="100"
                 :start-time="startTime1"
                 :end-time="endTime1"
@@ -156,7 +155,51 @@
 
     <div class="row mb-5">
       <div class="col">
-        <h4>Demo <small>中文</small></h4>
+        <h4>Hide zeros (隐藏00) <small><span class="badge badge-pill badge-warning">New</span></small></h4>
+        <hr>
+        <vue-countdown-timer
+            @start_callback="startCallBack('event start')"
+            @end_callback="endCallBack('event ended')"
+            :interval="100"
+            :start-time="startTime1"
+            :end-time="endTime1"
+            :start-label="'Till starts'"
+            :end-label="'Till ends'"
+            :end-text="'Ended'"
+            :day-txt="'days'"
+            :hour-txt="'hours'"
+            :minutes-txt="'minutes'"
+            :seconds-txt="'seconds'"
+            :show-zero="false">
+        </vue-countdown-timer>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>Hide certain units (隐藏特定单位) <small><span class="badge badge-pill badge-warning">New</span></small></h4>
+        <hr>
+        <vue-countdown-timer
+            @start_callback="startCallBack('event start')"
+            @end_callback="endCallBack('event ended')"
+            :interval="100"
+            :start-time="startTime3"
+            :end-time="endTime3"
+            :start-label="'Till starts'"
+            :end-label="'Till ends'"
+            :end-text="'Ended'"
+            :day-txt="null"
+            :hour-txt="'hours'"
+            :minutes-txt="null"
+            :seconds-txt="'seconds'"
+            :show-zero="true">
+        </vue-countdown-timer>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <h4>默认模板<small></small></h4>
         <hr>
         <vue-countdown-timer
                 @start_callback="startCallBack('活动开始')"
@@ -177,7 +220,7 @@
 
     <div class="row mb-5">
       <div class="col">
-        <h4>Demo <small>自定义模板</small></h4>
+        <h4>自定义模板<small></small></h4>
         <hr>
         <vue-countdown-timer
                 @start_callback="startCallBack('活动开始')"
@@ -227,7 +270,9 @@
         startTime1: new Date(now.getTime() + (1000 * 10)),
         endTime1: new Date(now.getTime() + (1000 * 20)),
         startTime2: new Date(now.getTime() + (1000 * 30)),
-        endTime2: new Date(now.getTime() + (1000 * 40))
+        endTime2: new Date(now.getTime() + (1000 * 40)),
+        startTime3: new Date(now.getTime() + (1000 * 60 * 60 * 24 * 2)),
+        endTime3: new Date(now.getTime() + (1000 * 60 * 60 * 24 * 2) + (1000 * 10))
       }
     },
     methods: {

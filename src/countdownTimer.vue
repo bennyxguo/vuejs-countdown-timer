@@ -25,12 +25,22 @@
       dayTxt,
       hourTxt,
       minutesTxt,
-      secondsTxt
+      secondsTxt,
+      showDay,
+      showHour,
+      showMinute
     }">
-      <span>{{days}}</span><i>{{dayTxt}}</i>
-      <span>{{hours}}</span><i>{{hourTxt}}</i>
-      <span>{{minutes}}</span><i>{{minutesTxt}}</i>
-      <span>{{seconds}}</span><i>{{secondsTxt}}</i>
+      <span v-if="showDay">{{days}}</span>
+      <i v-if="showDay">{{dayTxt}}</i>
+
+      <span v-if="showHour">{{hours}}</span>
+      <i v-if="showHour">{{hourTxt}}</i>
+
+      <span v-if="showMinute">{{minutes}}</span>
+      <i v-if="showMinute">{{minutesTxt}}</i>
+
+      <span>{{seconds}}</span>
+      <i v-if="secondsTxt">{{secondsTxt}}</i>
     </slot>
 
     <slot

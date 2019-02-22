@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.0 (Feb 22, 2019)
+#### Features
+- Added the ability to auto hide when each unit's time reaches zero
+- Added the ability to complete hide certain units
+
+#### Bug fixes
+- Fixed timestamp input for start time and end time not working
+
+
 ## 2.0.3 (Sep 30, 2018)
 - Day won't be hidden even day is 00
 - Changed the props value injected for slot `countdown`

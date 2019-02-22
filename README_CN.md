@@ -178,6 +178,9 @@ methods: {
 | minuteTxt         | 分钟数单位                                                                  |
 | seconds           | 倒计秒数                                                                    |
 | secondTxt         | 秒数单位                                                                    |
+| showDay           | 单位`天`的显示状态值                                                          |
+| showHour          | 单位`小时`的显示状态值                                                        |
+| showMinute        | 单位`分钟`的显示状态值                                                        |
 
 ### `end-label` Scoped Slot
 | Scope 名          | 描述                                                                        |
@@ -222,17 +225,17 @@ methods: {
 - `required` : false
 - `default` : 'Event ended!'
 
-**day-txt** - 自定义显示的天数文字
+**day-txt** - 自定义显示的天数文字, 传`null`这个单位就会被隐藏
 - `type`: String
 - `required` : false
 - `default` : ':'
     
-**hour-txt** - 自定义显示的小时文字
+**hour-txt** - 自定义显示的小时文字, 传`null`这个单位就会被隐藏
 - `type`: String
 - `required` : false
 - `default` : ':'
 
-**seconds-txt** - 自定义显示的分钟文字
+**seconds-txt** - 自定义显示的分钟文字, 传`null`这个单位就会被隐藏
 - `type`: String
 - `required` : false
 - `default` : ':'
@@ -241,6 +244,11 @@ methods: {
 - `type`: String
 - `required` : false
 - `default` : ':'
+
+**show-zero** - 是否显示到达00的单位
+- `type`: Boolean
+- `required` : false
+- `default` : true
     
 ### 事件
 **start_callback** - 开始倒计时结束之后的回调方法

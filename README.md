@@ -167,6 +167,9 @@ Vue Customized template
 | minuteTxt         | Minutes label                                                              |
 | seconds           | Number of seconds till event                                               |
 | secondTxt         | Seconds label                                                              |
+| showDay           | display status of day countdown number and text                            |
+| showHour          | display status of hour countdown number and text                           |
+| showMinute        | display status of minute countdown number and text                         |
 
 ### `end-label` Scoped Slot
 | Slot scope name   | Description                                                                |
@@ -216,17 +219,17 @@ Vue Customized template
 - `required` : false
 - `default` : 'Event ended!'
 
-**day-txt**
+**day-txt** - if pass `null`, this unit will be hidden
 - `type`: String
 - `required` : false
 - `default` : ':'
     
-**hour-txt**
+**hour-txt** - if pass `null`, this unit will be hidden
 - `type`: String
 - `required` : false
 - `default` : ':'
 
-**seconds-txt**
+**seconds-txt** - if pass `null`, this unit will be hidden
 - `type`: String
 - `required` : false
 - `default` : ':'
@@ -235,6 +238,11 @@ Vue Customized template
 - `type`: String
 - `required` : false
 - `default` : ':'
+
+**show-zero** - display status of 00
+- `type`: Boolean
+- `required` : false
+- `default` : true
     
 ### Events
 **start_callback** - Event started callback
