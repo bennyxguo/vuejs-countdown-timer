@@ -324,7 +324,10 @@ const VueCountdownTimer = {
         },
 
         end_message(){
-          if (this.currentTime <= 0) {
+          if (
+              this.currentTime <= 0 ||
+              this.currentTime < new Date(this.formatTime(this.endTime)).getTime()
+          ) {
             return;
           }
           this.$emit('end_callback', this.status);
