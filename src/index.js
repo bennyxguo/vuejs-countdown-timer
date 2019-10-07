@@ -172,15 +172,6 @@ const VueCountdownTimer = {
         },
 
         /**
-         * Current time in milliseconds
-         * 当前时间
-         * @returns {number}
-         */
-        time() {
-          return new Date().getTime();
-        },
-
-        /**
          * current event status
          * 当前活动状态
          * @returns {number}
@@ -365,7 +356,7 @@ const VueCountdownTimer = {
         update() {
           if (this.counting) {
             // Formating time - 格式化时间格式
-            this.$set(this, 'current', this.time)
+            this.$set(this, 'current', new Date().getTime())
             const startCount = new Date(this.formatTime(this.startTime)).getTime() - this.current;
             const endCount = new Date(this.formatTime(this.endTime)).getTime() - this.current;
 
