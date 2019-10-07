@@ -1,16 +1,21 @@
 # Changelog
 
+## 2.1.2 (Oct 07, 2019)
+### Bug fixes 🐛
+- Fixed reenter the active window current time is not recalculated.
+- Fixed event ended-callback triggered on vue mounted.
+
 ## 2.1.1 (Feb 22, 2019)
-### Changes
+### Changes 🙌
 - Changed the hiding logic of 00s, only hide if all previous units are hidden.
 - Changed the modification of the prop value, to avoid props changes in methods.
 
 ## 2.1.0 (Feb 22, 2019)
-#### Features
+#### Features ✨
 - Added the ability to auto hide when each unit's time reaches zero
 - Added the ability to complete hide certain units
 
-#### Bug fixes
+#### Bug fixes 🐛
 - Fixed timestamp input for start time and end time not working
 
 

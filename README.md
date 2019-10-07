@@ -255,7 +255,7 @@ Vue Customized template
 
 If the `end-time` prop is dynamically generated or 'computed', the initial value will be `NaN`. This will trigger the `end_callback` function, which might not be desirable. This can be solved by declaring it this way:
 
-```
+```vue
 <template>
   <vue-countdown-timer
     ...
@@ -268,7 +268,7 @@ If the `end-time` prop is dynamically generated or 'computed', the initial value
       return {
           endAt:  (new Date).getTime()+5000
       }
-  },
+  }
 </script>
         
 ```
