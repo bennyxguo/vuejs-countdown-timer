@@ -3,8 +3,8 @@
 <h1 align="center">Vue-countdown-timer Component</h1>
 
 <div align="center">
-  Vue 2 countdown and timer component <br>
-  —— Made with ❤️ by <a href="https://github.com/TriDiamond">TriDiamond</a>
+  <p>Vue 2 countdown and timer component <br>
+  —— Made with ❤️ by <a href="https://github.com/TriDiamond">TriDiamond</a></p>
 
   <p align="center">
     <a href="https://circleci.com/gh/TriDiamond/vuejs-countdown-timer/tree/master">
