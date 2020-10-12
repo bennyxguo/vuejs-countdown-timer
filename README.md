@@ -4,7 +4,7 @@
 
 <div align="center">
   Vue 2 countdown and timer component <br>
-  —— Made with ❤️ by [TriDiamond](https://github.com/TriDiamond)
+  —— Made with ❤️ by <a href="https://github.com/TriDiamond">TriDiamond</a>
 
   <p align="center">
     <a href="https://circleci.com/gh/TriDiamond/vuejs-countdown-timer/tree/master">

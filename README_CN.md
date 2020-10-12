@@ -4,7 +4,7 @@
 
 <div align="center">
   Vue 2 活动倒计时组件 <br>
-  —— Made with ❤️ by [TriDiamond](https://github.com/TriDiamond)
+  —— Made with ❤️ by <a href="https://github.com/TriDiamond">TriDiamond</a>
 
   <p align="center">
     <a href="https://circleci.com/gh/TriDiamond/vuejs-countdown-timer/tree/master">
