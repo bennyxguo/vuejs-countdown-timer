@@ -1,33 +1,48 @@
 # Changelog
 
-## 2.1.2 (Oct 07, 2019)
+## 2.1.3 (Oct 012, 2020)
+
 ### Bug fixes 🐛
+
+- Fixed the time convert browser compatibility issue [#12](https://github.com/TriDiamond/vuejs-countdown-timer/issues/12)
+
+## 2.1.2 (Oct 07, 2019)
+
+### Bug fixes 🐛
+
 - Fixed reenter the active window current time is not recalculated.
 - Fixed event ended-callback triggered on vue mounted.
 
 ## 2.1.1 (Feb 22, 2019)
+
 ### Changes 🙌
+
 - Changed the hiding logic of 00s, only hide if all previous units are hidden.
 - Changed the modification of the prop value, to avoid props changes in methods.
 
 ## 2.1.0 (Feb 22, 2019)
+
 #### Features ✨
+
 - Added the ability to auto hide when each unit's time reaches zero
 - Added the ability to complete hide certain units
 
 #### Bug fixes 🐛
+
 - Fixed timestamp input for start time and end time not working
 
-
 ## 2.0.3 (Sep 30, 2018)
+
 - Day won't be hidden even day is 00
 - Changed the props value injected for slot `countdown`
 - Added custom template usage document
 
 ## 2.0.2 (Sep 10, 2018)
+
 - Added timestamp conversion, if timestamp is less than 14digits, will automatically add 000 to the end.
 
 ## 2.0.1 (Sep 4, 2018)
+
 - Removed console.logs
 - Added demo link to documents
 
@@ -55,5 +70,5 @@
 
 - Fix export wrong component name
 - Fixed props failed to receive
-- Fixed template missing text 
+- Fixed template missing text
 - Add custom template feature
