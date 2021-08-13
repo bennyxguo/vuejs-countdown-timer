@@ -8,10 +8,10 @@
 
   <p align="center">
     <a href="https://circleci.com/gh/bennyxguo/vuejs-countdown-timer/tree/master">
-      <img src="https://img.shields.io/circleci/project/github/TriDiamond/vuejs-countdown-timer.svg" alt="Build Status">
+      <img src="https://img.shields.io/circleci/project/github/bennyxguo/vuejs-countdown-timer.svg" alt="Build Status">
     </a>
     <a href="https://github.com/bennyxguo/vuejs-countdown-timer/stargazers">
-      <img src="https://img.shields.io/github/stars/TriDiamond/vuejs-countdown-timer.svg" alt="Github starts">
+      <img src="https://img.shields.io/github/stars/bennyxguo/vuejs-countdown-timer.svg" alt="Github starts">
     </a>
     <a>
       <img src="https://img.shields.io/github/license/bennyxguo/vuejs-countdown-timer.svg" alt="License">
