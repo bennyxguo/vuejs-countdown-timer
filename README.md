@@ -7,14 +7,14 @@
   —— Made with ❤️ by <a href="https://github.com/TriDiamond">TriDiamond</a></p>
 
   <p align="center">
-    <a href="https://circleci.com/gh/TriDiamond/vuejs-countdown-timer/tree/master">
+    <a href="https://circleci.com/gh/bennyxguo/vuejs-countdown-timer/tree/master">
       <img src="https://img.shields.io/circleci/project/github/TriDiamond/vuejs-countdown-timer.svg" alt="Build Status">
     </a>
-    <a href="https://github.com/TriDiamond/vuejs-countdown-timer/stargazers">
+    <a href="https://github.com/bennyxguo/vuejs-countdown-timer/stargazers">
       <img src="https://img.shields.io/github/stars/TriDiamond/vuejs-countdown-timer.svg" alt="Github starts">
     </a>
     <a>
-      <img src="https://img.shields.io/github/license/TriDiamond/vuejs-countdown-timer.svg" alt="License">
+      <img src="https://img.shields.io/github/license/bennyxguo/vuejs-countdown-timer.svg" alt="License">
     </a>
     <a href="https://www.npmjs.com/package/vuejs-countdown-timer">
       <img src="https://img.shields.io/npm/dt/vuejs-countdown-timer.svg" alt="Npm downloads">
@@ -24,9 +24,9 @@
     </a>
   </p>
 
-[Demo](https://tridiamond.github.io/vuejs-countdown-timer/)
-[📙 中文文档](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/README_CN.md)
-[📙Changelog](https://github.com/TriDiamond/vuejs-countdown-timer/blob/master/CHANGELOG.md)
+[Demo](https://bennyxguo.github.io/vuejs-countdown-timer/)
+[📙 中文文档](https://github.com/bennyxguo/vuejs-countdown-timer/blob/master/README_CN.md)
+[📙Changelog](https://github.com/bennyxguo/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 
 </div>
 
