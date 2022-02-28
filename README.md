@@ -24,7 +24,7 @@
     </a>
   </p>
 
-[Demo](https://bennyxguo.github.io/vuejs-countdown-timer/)
+[Demo](https://codepen.io/kushal-twopeople/pen/xxPypbd)
 [📙 中文文档](https://github.com/bennyxguo/vuejs-countdown-timer/blob/master/README_CN.md)
 [📙Changelog](https://github.com/bennyxguo/vuejs-countdown-timer/blob/master/CHANGELOG.md)
 
